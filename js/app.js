@@ -43,3 +43,13 @@ if(!reduced.matches){
  const planObserver=new MutationObserver(()=>animateOnce($('#plan-detail')));planObserver.observe($('#plan-detail'),{childList:true});
  document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('page-hidden',document.hidden));
 }
+// Bienvenida una vez por sesión; cerrar devuelve el foco y habilita la página.
+const welcome=$('#welcome-dialog');
+if(welcome&&typeof welcome.showModal==='function'){
+ let seen=false;try{seen=sessionStorage.getItem('blink-welcome-10')==='closed'}catch{}
+ const closeWelcome=()=>welcome.close();
+ $('#welcome-close').onclick=closeWelcome;$('#welcome-enter').onclick=closeWelcome;
+ welcome.addEventListener('close',()=>{document.documentElement.classList.remove('welcome-open');try{sessionStorage.setItem('blink-welcome-10','closed')}catch{}document.querySelector('header a').focus({preventScroll:true})});
+ welcome.addEventListener('click',e=>{if(e.target===welcome){const box=welcome.getBoundingClientRect();if(e.clientX<box.left||e.clientX>box.right||e.clientY<box.top||e.clientY>box.bottom)closeWelcome()}});
+ if(!seen){welcome.showModal();document.documentElement.classList.add('welcome-open')}
+}
