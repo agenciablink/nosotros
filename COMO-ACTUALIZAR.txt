@@ -1,0 +1,1 @@
+Descomprime y reemplaza index.html, css/style.css, js/app.js e img/bienvenida-10.png en las mismas rutas de tu repositorio. Conserva datos y las demás imágenes. Incluye bienvenida corregida, botón verde con letras negras, imágenes redondeadas y franja continua. La bienvenida se muestra una vez por sesión.
